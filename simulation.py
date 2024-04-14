@@ -64,13 +64,14 @@ class Sun:
             plt.xlim((-10,10))
             plt.ylim((-10,10))
 
+            size=[10]+[1]*(self.positions.shape[0]-1)
             colors=( ['#ebc634']+ ['white']*(self.positions.shape[0]-1) )
             if intensity_by_mass:
                 alphas=( np.hstack( ([1],self.mass[1:]/((self.mass[1:]**2).sum())**0.5) ) )
-                plt.scatter(self.positions[:,0], self.positions[:,1], s=1,alpha=alphas,c=colors)
+                plt.scatter(self.positions[:,0], self.positions[:,1], s=size,alpha=alphas,c=colors)
 
             else:
-                plt.scatter(self.positions[:,0], self.positions[:,1], s=1, c=colors)
+                plt.scatter(self.positions[:,0], self.positions[:,1], s=size, c=colors)
 
             plt.pause(0.000001)
             self.one_iteration()
@@ -125,4 +126,5 @@ class Sun:
         pass
 
 gravity=Sun(1000,revolve=True)
-gravity.plot(100000, converge=True, intensity_by_mass=True)
+gravity.plot(100000, converge=True, intensity_by_mass=False)
+
